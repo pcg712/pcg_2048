@@ -35,7 +35,7 @@ namespace pcg_2048
             RanNum();
             this.KeyPreview = true;
         }
-        private void RanNum()
+        private void RanNum()//生成2或4加到2048矩阵
         {
             int i = R.Next(0, 4);
             int j = R.Next(0, 4);
@@ -47,7 +47,7 @@ namespace pcg_2048
             int k = R.Next(1, 11);
             if (k > 1) num[i, j] = 2;
             else num[i, j] = 4;
-        }  //生成2或4加到2048矩阵
+        }  
         private void Main_KeyDown(object sender, KeyEventArgs e)  //主窗口按键事件
         {
             int[,] n = new int[4, 4];
@@ -85,7 +85,7 @@ namespace pcg_2048
                 }
             return false;
         }
-        private void GoLeft()
+        private void GoLeft()  //方块左移
         {
             for (int i = 0; i < 4; i++)
             {
@@ -143,8 +143,8 @@ namespace pcg_2048
                     num[i, 3] = 0;
                 }
             }
-        }  //方块左移
-        private void GoRight()
+        }
+        private void GoRight()  //方块右移
         {
             for (int i = 0; i < 4; i++)
             {
@@ -202,8 +202,8 @@ namespace pcg_2048
                     num[i, 0] = 0;
                 }
             }
-        }  //方块右移
-        private void GoUp()
+        }
+        private void GoUp()  //方块上移
         {
             for (int i = 0; i < 4; i++)
             {
@@ -261,8 +261,8 @@ namespace pcg_2048
                     num[3, i] = 0;
                 }
             }
-        }  //方块上移
-        private void GoDown()
+        }
+        private void GoDown()  //方块下移
         {
             for (int i = 0; i < 4; i++)
             {
@@ -320,7 +320,7 @@ namespace pcg_2048
                     num[0, i] = 0;
                 }
             }
-        }  //方块下移
+        }
         private Boolean IfFull()  //2048矩阵是否被占满
         {
             Boolean flag = true;
@@ -335,7 +335,7 @@ namespace pcg_2048
                 }
             return flag;
         }
-        private Boolean IfRun()
+        private Boolean IfRun()  //方块是否还能移动
         {
             if (!IfFull()) return true;
             for (int i = 0; i < 4; i++)
@@ -363,8 +363,8 @@ namespace pcg_2048
                         return true;
                 }
             return false;
-        }  //方块是否还能移动
-        public int ChooseImg(int a)
+        }
+        public int ChooseImg(int a)  //为方块选择图片
         {
             switch (a)
             {
@@ -384,9 +384,9 @@ namespace pcg_2048
                 case 8192: return 17;
             }
             return 0;
-        }  //为方块选择图片
+        }
 
-        private void Draw()
+        private void Draw()  //打印方块和分数
         {
             if (num[0, 0] != 0)
                 l11.Text = num[0, 0].ToString();
@@ -453,7 +453,7 @@ namespace pcg_2048
             else l44.Text = "";
             l44.Image = OBitmap[ChooseImg(num[3, 3])];
             score.Text = Lscore.ToString();
-        }  //打印方块和分数
+        }
         private async void Rank(int _score)  //在后端进行排名
         {
             HttpClient httpClient = new HttpClient();
